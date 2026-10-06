@@ -1,0 +1,627 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Voice Assistant Studio</title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="mic.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">🎙️</div>
+
+            <div>
+                <h1>Voice Assistant Studio</h1>
+                <p>AI-Powered Text-to-Speech Experience</p>
+            </div>
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            <span>Voice Engine Ready</span>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="main-container">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section class="hero-section">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    ✨ AI VOICE STUDIO
+                </span>
+
+                <h2>
+                    Turn Your <span>Text</span><br>
+                    Into Natural Speech
+                </h2>
+
+                <p>
+                    Write, customize, and listen to your text using
+                    the powerful browser SpeechSynthesis API.
+                </p>
+
+            </div>
+
+            <div class="hero-icon">
+                🎧
+            </div>
+
+        </section>
+
+
+        <!-- ================= WORKSPACE ================= -->
+        <section class="workspace">
+
+            <!-- ================= LEFT SIDE ================= -->
+            <div class="text-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>📝 Your Text</h3>
+                        <p>Enter or paste the text you want to hear.</p>
+                    </div>
+
+                    <span class="character-count">
+                        0 characters
+                    </span>
+
+                </div>
+
+
+                <!-- TEXT AREA -->
+                <div class="textarea-wrapper">
+
+                    <textarea
+                        id="textInput"
+                        placeholder="Type or paste your text here...
+
+Example:
+Welcome to Voice Assistant Studio.
+Transform your ideas into natural speech."
+                        maxlength="3000"></textarea>
+
+                </div>
+
+
+                <!-- TEXT INFORMATION -->
+                <div class="text-info">
+
+                    <span>
+                        💬 <strong id="wordCount">0</strong> Words
+                    </span>
+
+                    <span>
+                        🔤 <strong id="characterCount">0</strong> Characters
+                    </span>
+
+                    <button type="button" id="clearButton">
+                        🗑️ Clear
+                    </button>
+
+                </div>
+
+
+                <!-- ================= SMART PRESETS ================= -->
+                <div class="preset-section">
+
+                    <div class="section-title">
+                        <h3>⚡ Smart Presets</h3>
+
+                        <span>
+                            Quick Text
+                        </span>
+                    </div>
+
+
+                    <div class="preset-buttons">
+
+                        <button
+                            type="button"
+                            class="preset-btn"
+                            id="welcomePreset">
+
+                            👋
+                            <span>
+                                <strong>Welcome</strong>
+                                <small>Greeting message</small>
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="preset-btn"
+                            id="motivationPreset">
+
+                            🚀
+                            <span>
+                                <strong>Motivation</strong>
+                                <small>Inspirational quote</small>
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="preset-btn"
+                            id="technicalPreset">
+
+                            💻
+                            <span>
+                                <strong>Technical</strong>
+                                <small>Technical definition</small>
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+            <div class="control-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>🎛️ Voice Controls</h3>
+                        <p>Customize your speaking experience.</p>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= VOICE SELECTION ================= -->
+                <div class="control-group">
+
+                    <label for="voiceSelect">
+                        🎙️ Select Voice
+                    </label>
+
+                    <select id="voiceSelect">
+                        <option value="">
+                            Loading available voices...
+                        </option>
+                    </select>
+
+                    <small>
+                        Choose an available browser voice.
+                    </small>
+
+                </div>
+
+
+                <!-- ================= SPEED ================= -->
+                <div class="control-group">
+
+                    <div class="range-header">
+
+                        <label for="rate">
+                            ⚡ Speech Rate
+                        </label>
+
+                        <span id="rateValue">
+                            1.0x
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="rate"
+                        min="0.5"
+                        max="2"
+                        step="0.1"
+                        value="1">
+
+                    <div class="range-labels">
+                        <span>Slow</span>
+                        <span>Normal</span>
+                        <span>Fast</span>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= PITCH ================= -->
+                <div class="control-group">
+
+                    <div class="range-header">
+
+                        <label for="pitch">
+                            🎵 Pitch
+                        </label>
+
+                        <span id="pitchValue">
+                            1.0
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="pitch"
+                        min="0"
+                        max="2"
+                        step="0.1"
+                        value="1">
+
+                    <div class="range-labels">
+                        <span>Low</span>
+                        <span>Normal</span>
+                        <span>High</span>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= VOLUME ================= -->
+                <div class="control-group">
+
+                    <div class="range-header">
+
+                        <label for="volume">
+                            🔊 Volume
+                        </label>
+
+                        <span id="volumeValue">
+                            100%
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="volume"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value="1">
+
+                    <div class="range-labels">
+                        <span>Quiet</span>
+                        <span>Medium</span>
+                        <span>Loud</span>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SPEAKING INDICATOR ================= -->
+                <div class="speaking-indicator" id="speakingIndicator">
+
+                    <div class="sound-icon">
+                        🔊
+                    </div>
+
+                    <div class="sound-info">
+
+                        <strong id="speechStatus">
+                            Ready to Speak
+                        </strong>
+
+                        <span>
+                            Your voice assistant is waiting...
+                        </span>
+
+                    </div>
+
+                    <div class="sound-wave">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= PLAYBACK CONTROLS ================= -->
+                <div class="playback-section">
+
+                    <h3>▶️ Playback</h3>
+
+                    <div class="playback-buttons">
+
+                        <button
+                            type="button"
+                            class="play-button"
+                            id="playButton">
+
+                            ▶️
+                            <span>Play / Resume</span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="pause-button"
+                            id="pauseButton">
+
+                            ⏸️
+                            <span>Pause</span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="stop-button"
+                            id="stopButton">
+
+                            ⏹️
+                            <span>Stop</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= DOWNLOAD ================= -->
+                <div class="download-section">
+
+                    <button
+                        type="button"
+                        class="download-button"
+                        id="downloadButton">
+
+                        💾
+                        <span>
+                            Download Speech Configuration
+                        </span>
+
+                    </button>
+
+                    <p>
+                        Save your text and selected voice settings.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+        <section class="features-section">
+
+            <div class="section-heading">
+
+                <span>✨ FEATURES</span>
+
+                <h2>
+                    Everything You Need
+                </h2>
+
+                <p>
+                    A simple and powerful text-to-speech experience.
+                </p>
+
+            </div>
+
+
+            <div class="feature-cards">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🗣️
+                    </div>
+
+                    <h3>Natural Voices</h3>
+
+                    <p>
+                        Select from voices available on your
+                        browser and operating system.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🎛️
+                    </div>
+
+                    <h3>Voice Controls</h3>
+
+                    <p>
+                        Adjust speech speed, pitch and volume
+                        according to your preference.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <h3>Smart Presets</h3>
+
+                    <p>
+                        Quickly load useful welcome,
+                        motivational and technical text.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📱
+                    </div>
+
+                    <h3>Responsive Design</h3>
+
+                    <p>
+                        Use the Voice Assistant Studio on
+                        desktop, tablet and mobile devices.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+        <section class="how-section">
+
+            <div class="section-heading">
+
+                <span>🚀 HOW IT WORKS</span>
+
+                <h2>
+                    Three Simple Steps
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>Write</h3>
+
+                    <p>
+                        Enter or paste your text into the
+                        text editor.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>Customize</h3>
+
+                    <p>
+                        Select a voice and adjust speed,
+                        pitch and volume.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>Listen</h3>
+
+                    <p>
+                        Press Play and listen to your
+                        text being spoken.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>🎙️ Voice Assistant Studio</h3>
+
+                <p>
+                    AI-Powered Text-to-Speech Web Application
+                </p>
+
+            </div>
+
+
+            <div class="footer-info">
+
+                <span>
+                    Web Programming
+                </span>
+
+                <span>•</span>
+
+                <span>
+                    BS Software Engineering
+                </span>
+
+                <span>•</span>
+
+                <span>
+                    Semester 5
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Voice Assistant Studio. Built with
+                HTML5, CSS3 & JavaScript.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JavaScript File -->
+    <script src="mic.js"></script>
+
+</body>
+</html>
+```
